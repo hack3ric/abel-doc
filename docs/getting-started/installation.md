@@ -15,10 +15,10 @@ Currently, Abel is still under heavy development, and is not published in reposi
 
 ### Clone and Compile
 
-```
-git clone https://github.com/hack3ric/abel
-cd abel
-cargo install --path abel-server
+```console
+$ git clone https://github.com/hack3ric/abel
+$ cd abel
+$ cargo install --path abel-server
 ```
 
 And that's it! Your Abel is ready.

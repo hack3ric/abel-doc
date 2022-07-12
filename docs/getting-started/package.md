@@ -18,13 +18,13 @@ my-awesome-service/
 ```
 
 Pack those files using `asar`:
-```sh
-asar pack my-awesome-service my-awesome-service.asar
+```console
+$ asar pack my-awesome-service my-awesome-service.asar
 ```
 
 The output asar file can be deployed by using field `multi`:
-```sh
-curl -X PUT \
-  https://abel.example.com/services/my-awesome-service \
-  -F multi=@my-awesome-service.asar
+```console
+$ curl -X PUT \
+    https://abel.example.com/services/my-awesome-service \
+    -F multi=@my-awesome-service.asar
 ```
