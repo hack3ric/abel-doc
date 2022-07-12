@@ -1,0 +1,53 @@
+site_name: Abel Documentation
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: orange
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: orange
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+
+nav:
+  - Home: index.md
+  - Manual:
+    - Getting Started:
+      - Installation: getting-started/installation.md
+      - Hello, World: getting-started/hello-world.md
+      - Package: getting-started/package.md
+    - Sandbox:
+      - Security: sandbox/security.md
+      - Modifications: sandbox/modifications.md
+      - File System: sandbox/file-system.md
+  - API:
+    - Builtins: api/builtins.md
+    - Abel API: api/abel.md
+    - HTTP: api/http.md
+    - File System: api/fs.md
+    - JSON: api/json.md
+    - Crypto: api/crypto.md
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
