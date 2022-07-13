@@ -37,7 +37,7 @@ json.undo_array(t: table) -> table
 ### Value
 
 ```ts
-type Value = nil | boolean | number | string | Value[] | { [string]: Value }
+type Value = nil | boolean | number | string | Value[] | { [key: string]: Value }
 ```
 
 Valid JSON value. It could be one of nil (no such field or null), boolean, number, string, string-keyed table or array.

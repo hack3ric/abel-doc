@@ -22,9 +22,9 @@ abel.register("/:name", hello)
 Start your Abel server:
 
 ```console
-$ abel-server
- INFO abel_server > Authentication token: f5db97cd-2eb4-45ad-a5d9-2d4a1dd80fec
- INFO abel_server > Abel is listening to 127.0.0.1:3000
+$ abel server
+ INFO abel::server > Authentication token: f5db97cd-2eb4-45ad-a5d9-2d4a1dd80fec
+ INFO abel::server > Abel is listening to 127.0.0.1:3000
 ```
 
 Upload your service to that server with the authentication token. Note that the header name is `Authorization`, not `Authentication`.

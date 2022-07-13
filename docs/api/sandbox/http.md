@@ -18,7 +18,7 @@ http.request(uri: string | Uri) -> Result<Response>
 http.request(req: {
   method?: string = "GET",
   uri: string,
-  headers?: { [string]: string | string[] },
+  headers?: { [key: string]: string | string[] },
   body?: Body,
 }) -> Result<Response>
 ```
@@ -99,7 +99,7 @@ The request's body.
 #### Request.params
 
 ```ts
-Request.params: { [string]: string }
+Request.params: { [key: string]: string }
 ```
 
 Extracted path parameters. Only used in `abel.register`.
@@ -117,7 +117,7 @@ HTTP response representation.
 ```ts
 http.Response(builder: {
   status?: integer = 200,
-  headers?: { [string]: string | string[] },
+  headers?: { [key: string]: string | string[] },
   body?: Body
 }) -> Response
 ```
@@ -158,7 +158,7 @@ http.Uri(builder: {
   authority?: string,
   path_and_query?: string,
   path?: string,
-  query?: { [string]: string }
+  query?: QueryMap
 }) -> Uri
 ```
 
@@ -169,7 +169,7 @@ Fragments in URIs are ignored, since these are not sent to the server in normal 
 #### Uri:query
 
 ```ts
-Uri:query() -> Result<{ [string]: string }>
+Uri:query() -> Result<QueryMap>
 ```
 
 Parses the query string of the URI, returning a map of query.
@@ -230,4 +230,10 @@ Uri.query_string: string
 
 ```ts
 type HeaderMap = <userdata>
+```
+
+### QueryMap
+
+```ts
+type QueryMap = { [key: string]: string | string[] | QueryMap | QueryMap[] }
 ```
