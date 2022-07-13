@@ -48,6 +48,7 @@ nav:
       - File System: api/sandbox/fs.md
       - JSON: api/sandbox/json.md
       - Crypto: api/sandbox/crypto.md
+      - Testing: api/sandbox/testing.md
 
 markdown_extensions:
   - pymdownx.highlight
