@@ -10,7 +10,7 @@ On a Lua state, each service runs on their own, isolated local environment. It f
 
 Abel enables a safe subset of the Lua standard library to prevent services from escaping sandbox, modifying the environment, etc.
 
-See [Modifications](../modifications) for a detailed list of what's changed.
+See [Modifications](modifications.md) for a detailed list of what's changed.
 
 ```lua
 -- Here are some examples of removed "unsafe" APIs.

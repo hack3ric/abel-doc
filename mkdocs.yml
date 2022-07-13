@@ -24,6 +24,7 @@ theme:
     - navigation.instant
     - navigation.sections
     - navigation.tabs
+    # - navigation.indexes
 
 nav:
   - Home: index.md
@@ -36,13 +37,18 @@ nav:
       - Security: sandbox/security.md
       - Modifications: sandbox/modifications.md
       - File System: sandbox/file-system.md
+    - Server:
+      - Managing Services: server/manage.md
+      - Configuration: server/config.md
   - API:
-    - Builtins: api/builtins.md
-    - Abel API: api/abel.md
-    - HTTP: api/http.md
-    - File System: api/fs.md
-    - JSON: api/json.md
-    - Crypto: api/crypto.md
+    - Service: api/service.md
+    - Sandbox:
+      - Builtins: api/sandbox/builtins.md
+      - Abel API: api/sandbox/abel.md
+      - HTTP: api/sandbox/http.md
+      - File System: api/sandbox/fs.md
+      - JSON: api/sandbox/json.md
+      - Crypto: api/sandbox/crypto.md
 
 markdown_extensions:
   - pymdownx.highlight

@@ -27,11 +27,11 @@ $ abel-server
  INFO abel_server > Abel is listening to 127.0.0.1:3000
 ```
 
-Upload your service to that server. Remember not to forget the authentication token!
+Upload your service to that server with the authentication token. Note that the header name is `Authorization`, not `Authentication`.
 
 ```console
 $ curl -X PUT 127.0.0.1:3000/services/hello \
-  -H "Authentication: Abel f5db97cd-2eb4-45ad-a5d9-2d4a1dd80fec" \
+  -H "Authorization: Abel f5db97cd-2eb4-45ad-a5d9-2d4a1dd80fec" \
   -F single=@hello.lua \
   | jq
 {

@@ -44,5 +44,5 @@ ByteStream:to_string() -> Result<string>
 #### ByteStream:parse_json
 
 ```ts
-ByteStream:to_string()
+ByteStream:parse_json() -> Result<Value>
 ```
