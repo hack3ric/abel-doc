@@ -1,5 +1,62 @@
 # Builtins
 
+## Methods
+
+### HttpError
+
+```ts
+HttpError(error: {
+  status?: integer,
+  error?: string,
+  detail?: Value,
+}) -> table
+```
+
+Allows to define an error kind, and reuse it with additional details.
+
+Returns the table `error` as is, with a metatable attached to it. It can be called as a function with an argument `detail`, returning the table with the original `status` and `error`, and the new `detail`.
+
+#### Examples
+
+```lua
+-- Service 'int-echo'
+
+local not_an_integer = HttpError {
+  status = 400,
+  error = "not an integer"
+}
+
+abel.listen("/:n", function(req)
+  local n = math.tointeger(req.params.n)
+  if not n then
+    error(not_an_integer { got = req.params.n })
+  end
+  return { int = n }
+end)
+```
+
+```console
+$ curl abel.example.com/int-echo/5 -v | jq
+< HTTP/1.1 200 OK
+{
+  "int": 5
+}
+$ curl abel.example.com/int-echo/3.14 -v | jq
+< HTTP/1.1 400 Bad Request
+{
+  "error": "not an integer",
+  "got": "3.14"
+}
+```
+
+### debug_fmt
+
+```ts
+debug_fmt(value: any) -> string
+```
+
+Formats the value into string in Rust debug style.
+
 ## Types
 
 ### Result
@@ -45,4 +102,16 @@ ByteStream:to_string() -> Result<string>
 
 ```ts
 ByteStream:parse_json() -> Result<Value>
+```
+
+### Promise
+
+```ts
+type Promise<T> = <userdata>
+```
+
+#### Promise:await
+
+```ts
+Promise<T>:await() -> T
 ```

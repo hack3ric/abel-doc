@@ -12,11 +12,11 @@ local function hello(req)
   }
 end
 
--- The former register is to listen to the "root path", which will the default
+-- The former `listen` is to listen to the "root path", which will the default
 -- name "world". The latter one matches exactly one path segment, and extracts that
 -- segments into `req.params.name`.
-abel.register("/", hello)
-abel.register("/:name", hello)
+abel.listen("/", hello)
+abel.listen("/:name", hello)
 ```
 
 Start your Abel server:

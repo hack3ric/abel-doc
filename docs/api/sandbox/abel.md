@@ -4,6 +4,27 @@ This contains APIs that is associated with Abel's executor, error handling, logi
 
 ## Methods
 
+### abel.listen
+
+```ts
+abel.listen(path: string, handler: (req: Request) -> Response | Body)
+```
+
+Registers a path and listens to it.
+
+The path matches in `listen`'s calling order: first handler `listen`ed is first matched. For example:
+
+```lua
+-- '/foo/bar' will go to `handler1`, while '/foo/baz' will go to `handler2`.
+abel.listen("/foo/bar", handler1)
+abel.listen("/foo/:value", handler2)
+
+-- However, if you switch the order of the two statements, even '/foo/bar' will be
+-- matched into `handler2` because '/foo/:value' matches first.
+abel.listen("/foo/:value", handler2)
+abel.listen("/foo/bar", handler1)
+```
+
 ### abel.current_worker
 
 ```ts
@@ -12,42 +33,34 @@ abel.current_worker() -> string
 
 Returns the current worker thread's name. Usually the names are `abel-worker-{i}`.
 
-### abel.Error
+### abel.spawn
 
 ```ts
-abel.Error(error: {
-  status?: integer,
-  error?: string,
-  detail?: Value,
-}) -> table
+abel.spawn<T>(fn: (...args: any) -> T, ...args: any) -> Promise<T>
 ```
 
-Allows to define an error kind, and reuse it with additional details.
+Spawns a new task that runs on the same thread concurrently with the current one. It shares the same context with the task calling `spawn`.
 
-Returns the table `error` as is, with a metatable attached to it. It can be called as a function with an argument `detail`, returning the table with the original `status` and `error`, and the new `detail`.
+Returns a [Promise](builtins.md#promise) that can be `await`ed at any time.
 
-#### Examples
+### abel.sleep
 
-```lua
-local not_an_integer = abel.Error {
-  status = 400,
-  error = "not an integer"
-}
-
-abel.register("/:n", function(req)
-  local n = math.tointeger(req.params.n)
-  if not n then
-    error(not_an_integer { got = req.params.n })
-  end
-end)
+```ts
+abel.sleep(ms: integer)
 ```
+
+Pauses the currently running tasks for *at least* a certain period of time `ms` in milliseconds, letting other tasks on the same executor to run. It does not account for CPU time.
+
+When `ms` is set to zero, it has the same effect as `coroutine.yield()`, which simply hands over the control of the executor to other tasks.
+
+Fails if `ms` is negative.
 
 ## Fields
 
 ### abel.start
 
 ```ts
-abel.start?: function()
+abel.start?: () -> any
 ```
 
 The service's start hook.
@@ -57,7 +70,7 @@ If it's a function, it's called every time the service starts.
 ### abel.stop
 
 ```ts
-abel.stop?: function()
+abel.stop?: () -> any
 ```
 
 The service's start hook.

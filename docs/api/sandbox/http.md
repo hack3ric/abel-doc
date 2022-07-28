@@ -62,7 +62,7 @@ type Request = <userdata>
 
 HTTP request representation.
 
-You don't need to manually create a `Request` yourself — either receive one in `abel.register`'s handlers, or send one using a builder table in `http.request`.
+You don't need to manually create a `Request` yourself — either receive one in `abel.listen`'s handlers, or send one using a builder table in `http.request`.
 
 #### Request.method
 
@@ -102,7 +102,7 @@ The request's body.
 Request.params: { [key: string]: string }
 ```
 
-Extracted path parameters. Only used in `abel.register`.
+Extracted path parameters. Only used in `abel.listen`'s handlers.
 
 ### Response
 

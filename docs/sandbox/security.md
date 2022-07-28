@@ -34,7 +34,7 @@ os.remove "/super/important/system/file"
 Lua 5.4 introduced local variable attributes `<const>` and `<close>`, the latter of which provides [RAII] functionality similar to Rust's. Abel bring this even further: files, sockets, etc. will be automatically `<close>`d after exiting a certain scope, even it isn't tagged `<close>`. This prevents resource leaking and starvation of process resources such as file handles, as well as eliminates the need of waiting GC to do the job.
 
 ```lua
-abel.register("/", function(req)
+abel.listen("/", function(req)
   -- Oops, forgot to add `<close>`!
   local file, err = io.open("/storage.csv", "a")
   assert(file, err)
