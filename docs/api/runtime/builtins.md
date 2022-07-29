@@ -12,7 +12,7 @@ HttpError(error: {
 }) -> table
 ```
 
-Allows to define an error kind, and reuse it with additional details.
+Defines an error kind, allowing reuse with additional details.
 
 Returns the table `error` as is, with a metatable attached to it. It can be called as a function with an argument `detail`, returning the table with the original `status` and `error`, and the new `detail`.
 
@@ -57,6 +57,12 @@ debug_fmt(value: any) -> string
 
 Formats the value into string in Rust debug style.
 
+### bind
+
+```ts
+bind<T>(fn: (...args: any) -> T, ...some: any) -> (...other: any) -> T
+```
+
 ## Types
 
 ### Result
@@ -81,7 +87,7 @@ It is still possible for a function that returns `Result<T>` to throw basic usag
 
     -- Or wrap `assert` around the function
     -- But this won't work if it has more than one value returned
-    local file <close>, err = assert(fs.open "/path/to/some/file")
+    local file <close> = assert(fs.open "/path/to/some/file")
     ```
 
 ### ByteStream
@@ -110,8 +116,14 @@ ByteStream:parse_json() -> Result<Value>
 type Promise<T> = <userdata>
 ```
 
+A "future value", similar to those in JavaScript.
+
 #### Promise:await
 
 ```ts
 Promise<T>:await() -> T
 ```
+
+Waits for the value to resolve.
+
+This method also propagates error when resolving the value. Note that error is *not* propagated if `await` is not called.

@@ -1,4 +1,4 @@
-# Service API
+# Service
 
 Service API is the HTTP interface of service management.
 

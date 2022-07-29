@@ -32,23 +32,25 @@ nav:
       - Installation: getting-started/installation.md
       - Hello, World: getting-started/hello-world.md
       - Package: getting-started/package.md
-    - Sandbox:
-      - Security: sandbox/security.md
-      - Modifications: sandbox/modifications.md
-      - File System: sandbox/file-system.md
+    - Runtime:
+      - Security: runtime/security.md
+      - Async: runtime/async.md
+      - Modifications: runtime/modifications.md
+      - File System: runtime/file-system.md
     - Server:
       - Managing Services: server/manage.md
       - Configuration: server/config.md
   - API:
-    - Service: api/service.md
-    - Sandbox:
-      - Builtins: api/sandbox/builtins.md
-      - Abel API: api/sandbox/abel.md
-      - HTTP: api/sandbox/http.md
-      - File System: api/sandbox/fs.md
-      - JSON: api/sandbox/json.md
-      - Crypto: api/sandbox/crypto.md
-      - Testing: api/sandbox/testing.md
+    - Runtime:
+      - Builtins: api/runtime/builtins.md
+      - Abel API: api/runtime/abel.md
+      - HTTP: api/runtime/http.md
+      - File System: api/runtime/fs.md
+      - JSON: api/runtime/json.md
+      - Crypto: api/runtime/crypto.md
+      - Testing: api/runtime/testing.md
+    - Server:
+      - Service: api/server/service.md
 
 markdown_extensions:
   - pymdownx.highlight

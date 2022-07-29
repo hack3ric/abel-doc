@@ -9,20 +9,22 @@ hide:
 
 Abel's name comes from *abelo*, which means bee in Esperanto. It further comes from *abelujo*, which means Hive (the project's former name).
 
+*Abel is currently under heavy development, and many functionalities are yet to be implemented. Nevertheless, feel free to try it out, and any feedback would be appreciated!*
+
 ## Getting Started
 
 There are a few places you can start reading:
 
 - If you haven't learned Lua yet, [the official Lua 5.4 reference](https://www.lua.org/manual/5.4/) is a good way to go.
 - [Manual](getting-started/installation.md) contains introduction to aspects of Abel.
-- [API reference](api/sandbox/builtins.md) contains detailed definitions of Service and Sandbox APIs.
+- [API reference](api/runtime/builtins.md) contains detailed definitions of Service and Sandbox APIs.
 
 ## Features
 
 - Fully multi-threaded & asynchronous
 - Writing, deploying and iterating Lua microservices without breaking a sweat
 - Compliant to HTTP standards and JSON RESTful API conventions
-- Sandbox environment, with limited yet powerful Sandbox API
+- Sandbox environment, with limited yet powerful Lua API
 
 ## Basic Concepts
 
