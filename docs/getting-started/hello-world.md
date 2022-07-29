@@ -8,7 +8,7 @@ The simpliest form of a Abel service is a single Lua file. So let's begin by cre
 local function hello(req)
   local name = req.params.name or "world"
   return {
-    greeting = string.format("Hello, %s", name)
+    greeting = "Hello, " .. name .. "!"
   }
 end
 
@@ -19,30 +19,16 @@ abel.listen("/", hello)
 abel.listen("/:name", hello)
 ```
 
-Start your Abel server:
+Start your Abel server in dev mode. This creates a temporary working environment for you to play on:
 
 ```console
-$ abel server
- INFO abel::server > Authentication token: f5db97cd-2eb4-45ad-a5d9-2d4a1dd80fec
- INFO abel::server > Abel is listening to 127.0.0.1:3000
+$ abel dev hello.lua
+ INFO  abel > Starting abel-server v0.1.0 (dev mode)
+ INFO  abel::server > Loaded service (89a90b6b-2555-48ef-852d-9fc930a5a5e4)
+ INFO  abel::server > Abel is listening to 127.0.0.1:3000
 ```
 
-Upload your service to that server with the authentication token. Note that the header name is `Authorization`, not `Authentication`.
-
-```console
-$ curl -X PUT 127.0.0.1:3000/services/hello \
-  -H "Authorization: Abel f5db97cd-2eb4-45ad-a5d9-2d4a1dd80fec" \
-  -F single=@hello.lua \
-  | jq
-{
-  "new_service": {
-    "name": "hello",
-    ...
-  }
-}
-```
-
-Now your hello world should be ready. Access it through HTTP, again:
+Now your hello world should be ready. Access it through HTTP:
 
 ```console
 $ curl 127.0.0.1:3000/hello
@@ -50,6 +36,24 @@ $ curl 127.0.0.1:3000/hello
 
 $ curl 127.0.0.1:3000/hello/Eric
 {"greeting":"Hello, Eric!"}
+```
+
+In dev mode, Abel also watches the file for changes and hot update it. Try to modify `hello.lua`:
+
+```lua
+  return {
+    greeting = "Hello, " .. name:upper() .. "!"
+  }
+```
+
+Then access it again. Now your name is screamed out!
+
+```console
+$ curl 127.0.0.1:3000/hello
+{"greeting":"Hello, WORLD!"}
+
+$ curl 127.0.0.1:3000/hello/Eric
+{"greeting":"Hello, ERIC!"}
 ```
 
 Voila! You just finished your first Abel service!

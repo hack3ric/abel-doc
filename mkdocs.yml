@@ -32,13 +32,13 @@ nav:
       - Installation: getting-started/installation.md
       - Hello, World: getting-started/hello-world.md
       - Package: getting-started/package.md
+      - Deploy: getting-started/deploy.md
     - Runtime:
       - Security: runtime/security.md
       - Async: runtime/async.md
       - Modifications: runtime/modifications.md
       - File System: runtime/file-system.md
     - Server:
-      - Managing Services: server/manage.md
       - Configuration: server/config.md
   - API:
     - Runtime:

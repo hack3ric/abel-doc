@@ -30,10 +30,10 @@ Uploads a service.
 #### Query
 
 - `mode`: Specifies how the services should be uploaded. Available options are:
-    - `create`: (Default) creates the service, errors if service exists
-    - `hot`
-    - `cold`
-    - `load`
+    - `create`: Creates the service if it doesn't exist, and errors if it does. This is the default option.
+    - `hot`: Updates the service while not calling `abel.start` or `abel.stop`. Creates the service if it doesn't exist.
+    - `cold`: Stops the service, replaces its source and starts it again. Creates the service if it doesn't exist.
+    - `load`: Simply loads the service into the server without starting. Errors if the service exists.
 
 #### Multipart Fields
 
