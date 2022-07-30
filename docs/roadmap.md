@@ -6,7 +6,11 @@ This is a (incomplete) list of upcoming features. Some of them have a tracking i
 
 - Remote `require` [#7](https://github.com/hack3ric/abel/issues/7)
 - Stream API [#8](https://github.com/hack3ric/abel/issues/8)
+- `multipart/form-data` support
+- Static file serving
 - Key-value storage
+- Custom sandbox parameters (e.g. CPU timeout)
+- Cron triggers
 - Workers (similar to Web Worker)
 
 ## User Experience
