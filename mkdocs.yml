@@ -39,6 +39,7 @@ nav:
       - File System: runtime/file-system.md
     - Server:
       - Configuration: server/config.md
+    - Roadmap: roadmap.md
   - API:
     - Runtime:
       - Builtins: api/runtime/builtins.md
