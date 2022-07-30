@@ -1,6 +1,6 @@
 # Roadmap
 
-This is a list of upcoming features. Some of them have a tracking issue attached.
+This is a (incomplete) list of upcoming features. Some of them have a tracking issue attached.
 
 ## Lua API
 
