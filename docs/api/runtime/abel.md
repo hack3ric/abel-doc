@@ -1,4 +1,4 @@
-# Abel API
+# Abel
 
 This contains APIs that is associated with Abel's executor, error handling, logic, etc.
 
@@ -41,7 +41,7 @@ abel.spawn<T>(fn: (...args: any) -> T, ...args: any) -> Promise<T>
 
 Spawns a new task that runs on the same thread concurrently with the current one. It shares the same context with the task calling `spawn`.
 
-Returns a [Promise](builtins.md#promise) that can be `await`ed at any time.
+Returns a [`Promise`](builtins.md#promise) that can be `await`ed at any time.
 
 ### abel.sleep
 

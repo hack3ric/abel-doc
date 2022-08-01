@@ -9,7 +9,7 @@ local json = require "json"
 ### json.parse
 
 ```ts
-json.parse(str: string) -> Result<Value>
+json.parse(str: string) -> Value
 ```
 
 Parses the JSON string to value.
@@ -17,7 +17,7 @@ Parses the JSON string to value.
 ### json.stringify
 
 ```ts
-json.stringify(value: Value, pretty?: boolean) -> Result<string>
+json.stringify(value: Value, pretty?: boolean) -> string
 ```
 
 ### json.array

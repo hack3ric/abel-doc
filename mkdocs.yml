@@ -37,13 +37,15 @@ nav:
       - Security: runtime/security.md
       - Modifications: runtime/modifications.md
       - File System: runtime/file-system.md
+      - Error Handling: runtime/error-handling.md
     - Server:
       - Configuration: server/config.md
     - Roadmap: roadmap.md
   - API:
     - Runtime:
       - Builtins: api/runtime/builtins.md
-      - Abel API: api/runtime/abel.md
+      - Abel: api/runtime/abel.md
+      - Stream: api/runtime/stream.md
       - HTTP: api/runtime/http.md
       - File System: api/runtime/fs.md
       - JSON: api/runtime/json.md

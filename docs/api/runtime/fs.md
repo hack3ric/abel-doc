@@ -1,6 +1,6 @@
 # File System
 
-Provides access to a service's isolated file system. It contains several functions that are re-exported to `io` and `os` Lua standard library for compatibility.
+Provides access to a service's isolated file system.
 
 ```lua
 local fs = require "fs"
@@ -11,10 +11,8 @@ local fs = require "fs"
 ### fs.open
 
 ```ts
-fs.open(path: string, mode: "r" | "w" | "a" | "r+" | "w+" | "a+") -> Result<File>
+fs.open(path: string, mode: "r" | "w" | "a" | "r+" | "w+" | "a+") -> File
 ```
-
-*Re-exports to `io.open`*
 
 ### fs.type
 
@@ -22,18 +20,16 @@ fs.open(path: string, mode: "r" | "w" | "a" | "r+" | "w+" | "a+") -> Result<File
 fs.type(file: any) -> nil | "file" | "closed file"
 ```
 
-*Re-exports to `io.type`*
-
 ### fs.mkdir
 
 ```ts
-fs.mkdir(path: string, all?: boolean) -> Result<boolean>
+fs.mkdir(path: string, all?: boolean)
 ```
 
 ### fs.rename
 
 ```ts
-fs.rename(from: string, to: string) -> Result<boolean>
+fs.rename(from: string, to: string)
 ```
 
 *Re-exports to `os.rename`*
@@ -41,17 +37,15 @@ fs.rename(from: string, to: string) -> Result<boolean>
 ### fs.remove
 
 ```ts
-fs.remove(path: string, all?: boolean) -> Result<boolean>
+fs.remove(path: string, all?: boolean)
 ```
 
 Removes a file or directory.
 
-Compared to `os.remove`, this method adds an additional `all` flag. If enabled, it will remove the entire directory similar to `rm -r`, instead of only removing empty ones. This could be dangerous, and you should use it with great caution!
-
 ### fs.metadata
 
 ```ts
-fs.metadata(path: string) -> Result<{ kind: "dir" | "file", size?: integer }>
+fs.metadata(path: string) -> { kind: "dir" | "file", size?: integer }
 ```
 
 ## Types
@@ -59,47 +53,51 @@ fs.metadata(path: string) -> Result<{ kind: "dir" | "file", size?: integer }>
 ### File
 
 ```ts
-type File = <userdata>
+type File: Stream<string>, BufStream, Sink<string> = <userdata>
 ```
 
 #### File:read
 
 ```ts
-File:read(...modes: ReadMode) -> Result<...string>
+File:read(...modes: ReadMode) -> ...string
 ```
+
+Reads some bytes from the file.
+
+When no arguments is passed, a random amount of bytes is returned, which is different from files from vanilla Lua and corresponds to `Stream<string>:read`.
+
+This method extends `BufStream:read` so that multiple read modes can be passed at the same time, returning multiple strings.
 
 #### File:write
 
 ```ts
-File:write(...str: string) -> Result<File>
+File:write(...bytes: string) -> File
 ```
+
+Writes some bytes from the file.
+
+This method extends `Sink<string>:write`, allowing multiple `bytes` to be written once.
 
 #### File:seek
 
 ```ts
-File:seek(whence: "set" | "cur" | "end", pos: integer) -> Result<integer>
+File:seek(whence: "set" | "cur" | "end", pos: integer) -> integer
 ```
 
 #### File:lines
 
 ```ts
-File:lines(mode: ReadMode) -> iterator<string>
+File:lines(mode: stream.ReadMode) -> iterator<string>
 ```
 
 #### File:flush
 
 ```ts
-File:flush() -> Result<boolean>
+File:flush()
 ```
 
 #### File:into_stream
 
 ```ts
 File:into_stream() -> ByteStream
-```
-
-### ReadMode
-
-```ts
-type ReadMode = integer | "a" | "l" | "L"
 ```

@@ -11,7 +11,7 @@ local http = require "http"
 ### http.request
 
 ```ts
-http.request(uri: string | Uri) -> Result<Response>
+http.request(uri: string | Uri) -> Response
 ```
 
 ```ts
@@ -20,7 +20,7 @@ http.request(req: {
   uri: string,
   headers?: { [key: string]: string | string[] },
   body?: Body,
-}) -> Result<Response>
+}) -> Response
 ```
 
 Sends an HTTP request. You can either use a single URI to send GET requests, or use other methods, add headers or a body with the latter builder table.
@@ -131,12 +131,12 @@ Response.status: integer
 ### Body
 
 ```ts
-type Body = nil | string | Value | ByteStream
+type Body = nil | string | Value | Stream<string>
 ```
 
-HTTP body representation. It could be nil, a string, a JSON value, or a `ByteStream`.
+HTTP body representation. It could be nil, a string, a JSON value, or a stream of strings.
 
-Note that the `Body` returned from methods or callbacks is always `ByteStream`. However, you can use one of the aforementioned types in custom requests and responses.
+Note that the `Body` returned from methods or callbacks is always [`ByteStream`](stream.md#bytestream). However, you can use one of the aforementioned types in custom requests and responses.
 
 ### Uri
 
@@ -169,7 +169,7 @@ Fragments in URIs are ignored, since these are not sent to the server in normal 
 #### Uri:query
 
 ```ts
-Uri:query() -> Result<QueryMap>
+Uri:query() -> QueryMap
 ```
 
 Parses the query string of the URI, returning a map of query.
@@ -230,6 +230,25 @@ Uri.query_string: string
 
 ```ts
 type HeaderMap = <userdata>
+```
+
+Map of HTTP headers.
+
+Can be indexed or iterated using `pairs`:
+
+```lua
+print("The content type is: " .. req.headers.content_type])
+
+print "Full header list:"
+for k, v in pairs(req.headers) do
+  print(k .. ": " .. v)
+end
+```
+
+#### HeaderMap:get
+
+```ts
+HeaderMap:get(key: string) -> ...string
 ```
 
 ### QueryMap

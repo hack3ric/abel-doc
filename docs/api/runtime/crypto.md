@@ -26,8 +26,8 @@ Rng:gen_range(low: integer, high: integer) -> integer
 
 ## Fields
 
-### crypto.thread_rng
+### crypto.ThreadRng
 
 ```ts
-crypto.thread_rng: Rng
+crypto.ThreadRng: Rng
 ```
