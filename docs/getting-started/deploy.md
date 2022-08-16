@@ -1,8 +1,8 @@
 # Deploy
 
-Deploy your service with Abel is easier than ever. It only takes an HTTP request to upload the source code to the server and ready to run.
+## Deploy Abel
 
-First, make sure you have `abel server` running on the host machine, and can be accessible through HTTP:
+Simply run `abel server` to start the server:
 
 ```console
 $ abel server
@@ -12,9 +12,31 @@ $ abel server
  INFO  abel::server > Abel is listening to 127.0.0.1:3000
 ```
 
-A reverse proxy is recommended, since Abel currently does not support HTTPS server.
+For server configuration, see [Manual/Server/Configuration](../server/config.md).
 
-Then deploy your service, simply with , with header `Authorization: Abel <your-auth-token>`:
+## Deploy Services
+
+Deploy your service with Abel is easier than ever. It only takes an HTTP request to upload the source code to the server and ready to run.
+
+### via CLI
+
+```console
+$ abel deploy path/to/service \
+  --server https://abel.example.com \
+  --auth-token <your-auth-token>
+```
+
+or use environment variables to specify them. This can be used along with tools like dotenv for your convenience.
+
+```console
+$ export ABEL_SERVER=https://abel.example.com
+$ export ABEL_AUTH_TOKEN=<your-auth-token>
+$ abel deploy path/to/service
+```
+
+### via HTTP
+
+Deploy your service using an HTTP client (here uses curl as example), with header `Authorization: Abel <your-auth-token>`:
 
 ```console
 $ curl https://abel.example.com/services/awesome-service \
@@ -36,5 +58,3 @@ $ curl https://abel.example.com/awesome-service
 ```
 
 For more methods to manage the service on the fly, see [API/Server/Service](../api/server/service.md).
-
-For server configuration, see [Manual/Server/Configuration](../server/config.md).
