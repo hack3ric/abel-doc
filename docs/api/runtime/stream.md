@@ -110,6 +110,12 @@ stream.pipe_to<T>(st: Stream<T>, sink: Sink<T>)
 stream.pipe_through<T, U>(st: Stream<T>, tr: Transform<T, U>) -> Stream<U>
 ```
 
+### stream.recv_from
+
+```ts
+stream.recv_from<T>(sink: Sink<T>, st: Stream<T>)
+```
+
 ### stream.recv_through
 
 ```ts

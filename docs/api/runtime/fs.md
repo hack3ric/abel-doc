@@ -14,11 +14,15 @@ local fs = require "fs"
 fs.open(path: string, mode: "r" | "w" | "a" | "r+" | "w+" | "a+") -> File
 ```
 
+Opens the file.
+
 ### fs.type
 
 ```ts
 fs.type(file: any) -> nil | "file" | "closed file"
 ```
+
+Check if `file` is a file instance. Returns `"file"` if it is an open file, `"closed file"` if it is a closed one, or `nil` if it is not one.
 
 ### fs.mkdir
 
@@ -26,13 +30,19 @@ fs.type(file: any) -> nil | "file" | "closed file"
 fs.mkdir(path: string, all?: boolean)
 ```
 
+Creates a directory.
+
+Errors if `path` points to source.
+
 ### fs.rename
 
 ```ts
 fs.rename(from: string, to: string)
 ```
 
-*Re-exports to `os.rename`*
+Renames an entry.
+
+Errors if `path` points to source.
 
 ### fs.remove
 
@@ -42,11 +52,17 @@ fs.remove(path: string, all?: boolean)
 
 Removes a file or directory.
 
+if `all` is set to true and `path` points to a directory that is not empty, it will remove all files inside it. Be careful!
+
+Errors if `path` points to source.
+
 ### fs.metadata
 
 ```ts
 fs.metadata(path: string) -> { kind: "dir" | "file", size?: integer }
 ```
+
+Gets basic information about an entry.
 
 ## Types
 
@@ -55,6 +71,8 @@ fs.metadata(path: string) -> { kind: "dir" | "file", size?: integer }
 ```ts
 type File: Stream<string>, BufStream, Sink<string> = <userdata>
 ```
+
+Representation of a file.
 
 #### File:read
 
@@ -96,8 +114,8 @@ File:lines(mode: stream.ReadMode) -> iterator<string>
 File:flush()
 ```
 
-#### File:into_stream
+#### File:close
 
 ```ts
-File:into_stream() -> ByteStream
+File:close()
 ```

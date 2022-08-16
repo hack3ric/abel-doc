@@ -25,6 +25,22 @@ http.request(req: {
 
 Sends an HTTP request. You can either use a single URI to send GET requests, or use other methods, add headers or a body with the latter builder table.
 
+For convenience, any underscore (`_`) in `headers`' keys is replaced with dash (`-`). To avoid that, use `@` prefix:
+
+```lua
+http.request {
+  headers = {
+    x_my_custom_header = "foo bar" -- sends `x-my-custom-header`
+  }
+}
+
+http.request {
+  headers = {
+    ["@x_my_custom_header"] = "foo bar" -- sends "x_my_custom_header"
+  }
+}
+```
+
 #### Examples
 
 The simpliest usage is to send a GET request to the server using a single URI:
@@ -62,7 +78,7 @@ type Request = <userdata>
 
 HTTP request representation.
 
-You don't need to manually create a `Request` yourself — either receive one in `abel.listen`'s handlers, or send one using a builder table in `http.request`.
+You don't need to manually create a `Request` yourself — either receive one in [`abel.listen`](abel.md#abellisten)'s handlers, or send one using a builder table in `http.request`.
 
 #### Request.method
 
@@ -102,7 +118,7 @@ The request's body.
 Request.params: { [key: string]: string }
 ```
 
-Extracted path parameters. Only used in `abel.listen`'s handlers.
+Extracted path parameters. Only used in [`abel.listen`](abel.md#abellisten)'s handlers.
 
 ### Response
 
@@ -126,6 +142,18 @@ http.Response(builder: {
 
 ```ts
 Response.status: integer
+```
+
+#### Response.header
+
+```ts
+Response.header: HeaderMap
+```
+
+#### Response.body
+
+```ts
+Response.body: Body
 ```
 
 ### Body
@@ -172,7 +200,7 @@ Fragments in URIs are ignored, since these are not sent to the server in normal 
 Uri:query() -> QueryMap
 ```
 
-Parses the query string of the URI, returning a map of query.
+Parses the query string of the URI, returning a map of query as [`QueryMap`](#querymap).
 
 Returns error if parsing query string failed.
 
@@ -234,15 +262,21 @@ type HeaderMap = <userdata>
 
 Map of HTTP headers.
 
-Can be indexed or iterated using `pairs`:
+Can be indexed or iterated using `pairs`.
 
 ```lua
-print("The content type is: " .. req.headers.content_type])
+print("The content type is: " .. req.headers.content_type)
 
 print "Full header list:"
 for k, v in pairs(req.headers) do
   print(k .. ": " .. v)
 end
+```
+
+When indexed, underscores (`_`) can be used as dashes (`-`), as the above code shows. If you do want to access a field with underscores in its name, you can use `@` prefix: 
+
+```lua
+local my_header = req.headers["@header_with_underscore"]
 ```
 
 #### HeaderMap:get
@@ -251,8 +285,14 @@ end
 HeaderMap:get(key: string) -> ...string
 ```
 
+Get one or more header field of the name `key`.
+
+This method strictly matches its name, meaning that it does not replace underscores in `key` or use `@` prefix.
+
 ### QueryMap
 
 ```ts
 type QueryMap = { [key: string]: string | string[] | QueryMap | QueryMap[] }
 ```
+
+Representing an URI's query structure, with multi-level support.
